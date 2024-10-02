@@ -38,6 +38,71 @@ public class solutions
         return max;
         
     }
+    
 
     
+}
+
+public class solutions
+{
+
+    public List<List<int>> CombinationSum(int[] candidates, int target)
+    {
+
+        List<List<int>> Res = new List<List<int>>();
+
+        void Dfs(int i, List<int> current, int total)
+        {
+            if (total.Equals(target))
+            {
+                Res.Add(new List<int>(current));
+                return;
+            }
+
+            if (i >= candidates.Length || total > target)
+            {
+                return;
+            }
+            current.Add(candidates[i]);
+            
+           
+            Dfs(i, current, total + candidates[i]);
+            current.RemoveAt(current.Count- 1);
+            
+            
+            
+            
+            Dfs(i + 1, current, total);
+            
+            
+        }
+         
+        Dfs(0, [], 0);
+
+
+
+
+        return Res;
+    }
+
+    public static void Main(string[] args)
+    {
+        solutions solutions = new solutions();
+
+        int[] current = new int[] { 2, 3, 6, 7 };
+        
+        List<List<int>> Res =solutions.CombinationSum(current, 7);
+
+        foreach (var res in Res)
+        {
+            Console.WriteLine(string.Join(", ", res));
+        }
+        
+        
+       
+        
+        
+        
+    }
+
 }
