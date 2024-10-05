@@ -1,5 +1,7 @@
 namespace Linked_listSolution;
 
+
+//maximum product subarray
 public class solutions
 {
     public int getmax(int[] nums)
@@ -42,7 +44,7 @@ public class solutions
 
     
 }
-
+//39 Combination sum 
 public class solutions
 {
 
@@ -99,10 +101,51 @@ public class solutions
         }
         
         
-       
-        
-        
-        
     }
 
+}
+
+//295. Find Median from Data Stream
+public class MedianFinder {
+    
+    private PriorityQueue<int, int> minHeap;
+  
+    private PriorityQueue<int, int> maxHeap;
+
+    public MedianFinder() {
+        minHeap = new PriorityQueue<int, int>();
+        maxHeap = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+    }
+
+    public void AddNum(int num) {
+        
+        maxHeap.Enqueue(num, num);
+
+        
+        if (minHeap.Count > 0 && maxHeap.Peek() > minHeap.Peek()) {
+            int toMinHeap = maxHeap.Dequeue();
+            minHeap.Enqueue(toMinHeap, toMinHeap);
+        }
+
+        if (maxHeap.Count > minHeap.Count + 1) {
+            int toMinHeap = maxHeap.Dequeue();
+            minHeap.Enqueue(toMinHeap, toMinHeap);
+        }
+        else if (minHeap.Count > maxHeap.Count) {
+            int toMaxHeap = minHeap.Dequeue();
+            maxHeap.Enqueue(toMaxHeap, toMaxHeap);
+        }
+    }
+
+    public double FindMedian() {
+        if (maxHeap.Count > minHeap.Count) {
+            // maxHeap has one more element, so the median is the top of maxHeap
+            return maxHeap.Peek();
+        }
+        else {
+            // Both heaps are balanced, so the median is the average of both tops
+            return (maxHeap.Peek() + minHeap.Peek()) / 2.0;
+        }
+    }
+    
 }
