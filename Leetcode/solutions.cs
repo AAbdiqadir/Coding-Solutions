@@ -47,6 +47,22 @@ public class solutions
 //39 Combination sum 
 public class solutions
 {
+/39 Combination sum 
+public class solutions
+{
+
+    public List<List<int>> CombinationSum(int[] candidates, int target)
+    {
+
+        List<List<int>> Res = new List<List<int>>();
+
+        void Dfs(int i, List<int> current, int total)
+        {
+            if (total.Equals(target))
+            {
+                Res.Add(new List<int>(current));
+                return;
+            }
 
     public List<List<int>> CombinationSum(int[] candidates, int target)
     {
@@ -148,4 +164,90 @@ public class MedianFinder {
         }
     }
     
+}
+
+//424. Longest Repeating Character Replacement
+public class solution
+{
+
+    public int CharacterReplacement(string s, int k)
+    {
+        int pointer1 = 0;
+
+        int maxcount = 0;
+
+        int maxLength = 0;
+        int[] char_ = new int[26];
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            char_[s[i] - 'A']++;
+
+            maxcount = Math.Max(maxcount, char_[s[i] - 'A']);
+
+
+            while ((i - pointer1 + 1) - maxcount > k)
+            {
+                char_[s[pointer1] - 'A']--;
+                pointer1++;
+
+
+
+            }
+
+            maxLength = Math.Max(maxLength, i - pointer1 + 1);
+
+        }
+
+
+        return maxLength;
+    }
+    
+}
+
+//300. Longest Increasing Subsequence
+public class Solution {
+    public int LengthOfLIS(int[] nums) {
+        
+        
+        int pointer1= nums.Length-1;
+        int maxlength = 0;
+        int n = nums.Length;
+        int[] num = Enumerable.Repeat(1, n).ToArray();
+        int latest = 0;
+        
+
+        while (pointer1 >=0)
+        {
+            for (int i = pointer1+1; i < nums.Length; i ++){
+                
+                //Console.WriteLine(nums[pointer1] + " "+ nums[i]);
+                if (nums[pointer1]< nums[i] )
+                {
+                    
+                    num[pointer1] = Math.Max(num[i]+1,num[pointer1]);
+                    Console.WriteLine(nums[pointer1] +" "+ nums[i] + " "+ num[pointer1]);
+                    
+                    
+
+                }
+                
+            
+                
+            }
+            
+            pointer1--;
+
+        }
+        return num.Max();
+    }
+
+    public static void Main(String[] args)
+    {
+        Solution solution = new Solution();
+
+        int[] nums = [2,5,3,7];
+        
+        Console.WriteLine(solution.LengthOfLIS(nums));
+    }
 }
